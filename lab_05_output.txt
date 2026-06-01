@@ -1,0 +1,98 @@
+==================================================
+STEP 1: Data Loading & Exploration
+==================================================
+--- Sample Raw Titanic Dataset Snapshot ---
+   PassengerId  Survived  Pclass     Sex  ...  SibSp  Parch        Fare  Embarked
+0            1         0       3    male  ...      0      0  133.661810         S
+1            2         1       3    male  ...      0      0    7.506573         S
+2            3         1       2  female  ...      1      0    4.469377         C
+3            4         0       3  female  ...      0      0    7.282302         C
+4            5         0       1    male  ...      0      0   46.899272         S
+
+[5 rows x 9 columns]
+
+Dataset Shape: (891, 9)
+
+==================================================
+STEP 2: Data Preprocessing & Feature Engineering
+==================================================
+Processed input features layout:
+   Pclass   Age  SibSp  Parch  ...  Sex_male  Embarked_Q  Embarked_S  Embarked_nan
+0       3  54.0      0      0  ...      True       False        True         False
+1       3  26.0      0      0  ...      True       False        True         False
+2       2  26.0      1      0  ...     False       False       False         False
+3       3  35.0      0      0  ...     False       False       False         False
+4       1  38.0      0      0  ...      True       False        True         False
+
+[5 rows x 9 columns]
+
+==================================================
+STEP 3: Train-Test Split and Standardization
+==================================================
+Training matrices dimensions: (712, 9)
+Testing matrices dimensions: (179, 9)
+
+==================================================
+STEP 4: Model Training and Multi-Algorithm Comparison
+==================================================
+
+>>> Running Core Model Pipeline: Logistic Regression <<<
+Accuracy Performance Score: 0.6927
+Confusion Matrix Layout:
+[[124   0]
+ [ 55   0]]
+Detailed Classification Breakdown Report:
+              precision    recall  f1-score   support
+
+           0       0.69      1.00      0.82       124
+           1       0.00      0.00      0.00        55
+
+    accuracy                           0.69       179
+   macro avg       0.35      0.50      0.41       179
+weighted avg       0.48      0.69      0.57       179
+
+
+>>> Running Core Model Pipeline: Decision Tree <<<
+Accuracy Performance Score: 0.5251
+Confusion Matrix Layout:
+[[73 51]
+ [34 21]]
+Detailed Classification Breakdown Report:
+              precision    recall  f1-score   support
+
+           0       0.68      0.59      0.63       124
+           1       0.29      0.38      0.33        55
+
+    accuracy                           0.53       179
+   macro avg       0.49      0.49      0.48       179
+weighted avg       0.56      0.53      0.54       179
+
+
+>>> Running Core Model Pipeline: Random Forest <<<
+Accuracy Performance Score: 0.4860
+Confusion Matrix Layout:
+[[75 49]
+ [43 12]]
+Detailed Classification Breakdown Report:
+              precision    recall  f1-score   support
+
+           0       0.64      0.60      0.62       124
+           1       0.20      0.22      0.21        55
+
+    accuracy                           0.49       179
+   macro avg       0.42      0.41      0.41       179
+weighted avg       0.50      0.49      0.49       179
+
+
+==================================================
+STEP 5: Hyperparameter Tuning via Grid Search Optimization
+==================================================
+Optimized Parameters Selected: {'max_depth': 5, 'n_estimators': 50}
+Optimized Random Forest Test Accuracy: 0.6704
+
+==================================================
+STEP 6: Saving Best Model & Generating Summary Chart
+==================================================
+[SUCCESS] Model saved successfully as 'titanic_best_model.joblib'
+[ALL DONE] Performance bar chart saved directly as 'titanic_model_comparison.png'
+==================================================
